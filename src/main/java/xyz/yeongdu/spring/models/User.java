@@ -34,7 +34,8 @@ public class User {
     private UserRole role = UserRole.ROLE_MEMBER;
     @AllArgsConstructor
     public enum UserRole {
-        ROLE_MEMBER("사용자");
+        ROLE_MEMBER("사용자"),
+        ROLE_ADMIN("관리자");
         @Getter
         final String role;
     }

@@ -22,7 +22,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<SingleResponseDto<UserDto>> createUser(@RequestBody UserDto userDto) {
         User user = this.userService.createUser(userDto);
         return new ResponseEntity<>(new SingleResponseDto<>(user.toDto()), HttpStatus.CREATED);
