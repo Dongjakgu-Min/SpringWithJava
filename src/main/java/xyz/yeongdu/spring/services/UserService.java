@@ -22,9 +22,6 @@ public class UserService {
     public User createUser(UserDto userDto) {
         User user = this.userRepository.findUserByUsername(userDto.getUsername());
 
-        System.out.println(user);
-        System.out.println(userDto.getUsername());
-
         if (user != null) throw new ResponseStatusException(HttpStatus.CONFLICT, "Conflict Data");
 
         return this.userRepository.save(
