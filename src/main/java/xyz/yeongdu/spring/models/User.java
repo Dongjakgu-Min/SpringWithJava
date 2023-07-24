@@ -5,9 +5,12 @@ import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import xyz.yeongdu.spring.dtos.UserDto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 

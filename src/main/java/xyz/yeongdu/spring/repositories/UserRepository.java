@@ -6,4 +6,5 @@ import xyz.yeongdu.spring.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUsername(String username);
+    User findUserById(Long userId);
 }
