@@ -35,11 +35,10 @@ public class User {
     private Date deletedAt;
     @Builder.Default @Enumerated @Column
     private UserRole role = UserRole.ROLE_MEMBER;
-    @AllArgsConstructor
+    @RequiredArgsConstructor
     public enum UserRole {
-        ROLE_MEMBER("사용자"),
-        ROLE_ADMIN("관리자");
-        @Getter
+        ROLE_MEMBER("ROLE_MEMBER"),
+        ROLE_ADMIN("ROLE_ADMIN");
         final String role;
     }
 
