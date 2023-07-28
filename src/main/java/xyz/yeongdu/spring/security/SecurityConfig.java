@@ -12,15 +12,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import xyz.yeongdu.spring.exceptions.AccessDeniedException;
-import xyz.yeongdu.spring.exceptions.AuthException;
-import xyz.yeongdu.spring.models.User;
+import xyz.yeongdu.spring.response.AccessDeniedResponse;
+import xyz.yeongdu.spring.security.handler.AccessDeniedExceptionHandler;
+import xyz.yeongdu.spring.security.handler.AuthExceptionHandler;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
+    private final AuthExceptionHandler authExceptionHandler;
+    private final AccessDeniedExceptionHandler accessDeniedExceptionHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -40,8 +42,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/api/user").hasRole("ADMIN")
                                 .anyRequest().hasRole("ADMIN"))
                 .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(new AuthException())
-                        .accessDeniedHandler(new AccessDeniedException()))
+                        .authenticationEntryPoint(authExceptionHandler)
+                        .accessDeniedHandler(accessDeniedExceptionHandler))
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
